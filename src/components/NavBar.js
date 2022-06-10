@@ -1,5 +1,6 @@
 import logo from '../images/logo.svg';
 import React from "react";
+import { Link } from "react-router-dom";
 
 class NavBar extends React.Component {
     constructor(props) {
@@ -16,13 +17,14 @@ class NavBar extends React.Component {
         const { logoDiv, li } = this.state;
         const height = logoDiv.clientHeight;
         const margin = (height - li.clientHeight) / 2;
-        console.log(logoDiv.clientHeight, height, margin);
         this.setState({ navHeight: height, margin });
     }
 
     componentDidMount() {
-        this.resize();
-        window.addEventListener('resize', this.resize);
+        setTimeout(() => {
+            this.resize();
+            window.addEventListener('resize', this.resize);
+        }, 10);
     }
 
     render() {
@@ -41,9 +43,9 @@ class NavBar extends React.Component {
                     <div className = "col-xs-11 col-sm-11 col-md-11 col-lg-11 text-right">
                     <div className = "primary-nav" style={{ height: navHeight > 0 ? navHeight : "auto" }} >
                         <ul>
-                        <li style={{ marginTop: margin }} ref={ref => this.state.li = ref}><a href = "index.html">Home</a></li>
-                        <li style={{ marginTop: margin }}><a href = "portfolio.html">Portfolio</a></li>
-                        <li style={{ marginTop: margin }}><a href = "contact.html">Contact</a></li>
+                            <li style={{ marginTop: margin }} ref={ref => this.state.li = ref}><Link to={"/"}>Home</Link></li>
+                            <li style={{ marginTop: margin }}><a href = "portfolio.html"><Link to={"portfolio"}>Portfolio</Link></a></li>
+                            <li style={{ marginTop: margin }}><a href = "contact.html"><Link to={"contact"}>Contact</Link></a></li>
                         </ul>
                     </div>
                     </div>
